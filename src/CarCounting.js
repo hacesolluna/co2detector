@@ -14,7 +14,7 @@ const CarCounting = ({ navigateTo }) => {
   // const seconds = Math.floor(videoDuration % 60);
   const [fileName, setFileName] = useState('None');
   const [videoEnded, setVideoEnded] = useState(false);
-  const texts = ["Climate change is directly contributing to humanitarian emergencies from heatwaves, wildfires, floods, tropical storms and hurricanes and they are increasing in scale, frequency and intensity.", "Research shows that 3.6 billion people already live in areas highly susceptible to climate change. Between 2030 and 2050, climate change is expected to cause approximately 250 000 additional deaths per year, from undernutrition, malaria, diarrhoea and heat stress alone.", "The direct damage costs to health (excluding costs in health-determining sectors such as agriculture and water and sanitation) is estimated to be between US$ 2–4 billion per year by 2030.", "Areas with weak health infrastructure – mostly in developing countries – will be the least able to cope without assistance to prepare and respond.", "Reducing emissions of greenhouse gases through better transport, food and energy use choices can result in very large gains for health, particularly through reduced air pollution."];
+  const texts = ["Some communities of color living in risk-prone areas face cumulative exposure to multiple pollutants", "Research shows that 3.6 billion people already live in areas highly susceptible to climate change. Between 2030 and 2050, climate change is expected to cause approximately 250 000 additional deaths per year, from undernutrition, malaria, diarrhoea and heat stress alone.", "Low income families are at risk of physical and mental illnesses during flooding and in crowded shelter conditions", "Areas with weak health infrastructure – mostly in developing countries – will be the least able to cope without assistance to prepare and respond.", "Reducing emissions of greenhouse gases through better transport, food and energy use choices can result in very large gains for health, particularly through reduced air pollution."];
   const [currentText, setCurrentText] = useState(texts[0]);
 
   useEffect(() => {
@@ -34,7 +34,6 @@ const CarCounting = ({ navigateTo }) => {
       setCurrentText(texts[index]);
     }, 9000);
   
-    // Clean up the interval on unmount
     return () => clearInterval(intervalId);
   }, []);
 
@@ -114,11 +113,13 @@ const CarCounting = ({ navigateTo }) => {
 
   const averageCarCountPerMinute = (carCount / (videoDuration / 60)).toFixed(2);
 
-
   return (
-    <div className='flex flex-col items-center justify-start h-full p-5' style = {{marginTop: '5%'}}>
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center" style={{backgroundImage: "url('cae.jpg')"}}>
+    <div className="absolute inset-0" style={{backgroundColor:'rgba(58, 26, 89, 0.36)'}}></div>
+      <div className="relative flex flex-col items-center text-white text-center w-screen h-full p-5">  
+
         {/* Instructions/Text */}
-        <h1 className="text-6xl tracking-wide font-semibold mb-6" tabIndex='0'>Start Detecting</h1>
+        <h1 className="text-6xl tracking-wide font-semibold mb-6 mt-8" tabIndex='0'>Start Detecting</h1>
         <div className="centered text-white mb-5" style={{ maxWidth: '700px', border: 'solid white', backgroundColor: '#3C156350'}}>
           <h2 className="text-4xl tracking-wide font-semibold mt-5" tabIndex='0'>Instructions</h2>
           <ul className="px-5 py-5 text-xl leading-loose" style={{ textAlign: 'left' }}>
@@ -130,6 +131,7 @@ const CarCounting = ({ navigateTo }) => {
             <li tabIndex='0'>2. Upload the video to the CO2 Detector app</li>
             <li tabIndex='0'>3. The app will find the average number of cars per minute, giving you a summary of the CO2 air quality information in the area</li>
           </ul>
+
           {/* Input */}
           <>
             <label tabIndex='0' htmlFor="file-input" className="px-3 py-2 mt-5 text-2xl rounded cursor-pointer hover:bg-blue-500 hover:border-gray-200 bg-blue-600 text-white shadow-inner">
@@ -150,6 +152,7 @@ const CarCounting = ({ navigateTo }) => {
             <canvas ref={canvasRef} className="hidden" />
           </>
         </div>
+
         {/* Popup */}
         {videoLoaded && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -174,6 +177,7 @@ const CarCounting = ({ navigateTo }) => {
                         <p tabIndex='0' className='font-semibold text-2xl'>Your Results:</p>
                         <p tabIndex='0' className='font-semibold text-xl'>The average car count per minute is <span className="bg-purple-200 px-1">{averageCarCountPerMinute}.</span></p>
                         <p tabIndex='0' className='font-semibold text-xl'><span className="bg-purple-200 px-1">{(averageCarCountPerMinute * 166.8).toFixed(2)}</span> parts per million (ppm) of CO2 per minute is released from on-road transportation in your immediate area.</p>
+
                         {/* info box */}
                         <div className="flex text-left p-4 mb-4 text-lg text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                           <svg className="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -190,7 +194,7 @@ const CarCounting = ({ navigateTo }) => {
                           </div>
                         </div>
                       </>
-                    ) : (
+                    ) : ( 
                     <div className="flex flex-col justify-center items-center">
                       <div role="status">
                         <svg aria-hidden="true" className="inline w-10 h-10 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -213,6 +217,7 @@ const CarCounting = ({ navigateTo }) => {
             </div>
           </div>
         )}
+
         {/* Navigation Buttons */}
         <div className="flex flex-row mx-auto text-xl">
           <button onClick={() => navigateTo('why')} type="button" className="bg-white text-black rounded-l-md border-r border-gray-500 py-2 hover:bg-purple-300 px-3">
@@ -232,9 +237,9 @@ const CarCounting = ({ navigateTo }) => {
             </div>
           </button>
         </div>
-        {/* <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={() => navigateTo('home')}>Back to Home</button> */}
+
     </div>
-      
+    </div>
   );
 };
 

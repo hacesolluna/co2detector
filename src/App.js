@@ -21,11 +21,12 @@ function App() {
 
   return (
     <div className="App">
-      <div className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center" style={{backgroundImage: "url('cae.jpg')", backgroundRepeat: 'no-repeat', height: '100vg'}}>
-        <div className="absolute inset-0" style={{backgroundColor:'rgba(58, 26, 89, 0.36)'}}></div>
+      <div className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center">
         <div className="relative z-10 text-white text-center w-screen h-screen">
+
+          {/* Header */}
           <header style={{height:'10%'}}>
-            <nav style={{height: '100%'}}>
+            <nav className="bg-black" style={{height: '100%'}}>
             <div className="max-full relative z-10 flex flex-wrap items-center bg-black justify-between mx-auto p-4 px-6">
               <button onClick={() => setCurrentPage('home')} className="flex items-center space-x-3 rtl:space-x-reverse">
                   <img src="whitelogo.png" className="h-12" alt="CO2 Logo"/>
@@ -47,9 +48,12 @@ function App() {
             </div>
             </nav>
           </header>
+
+          {/* Main Body */}
           <main style={{height:'90%'}}>
             {renderPage()}
           </main>
+          
         </div>
       </div>
     </div>
